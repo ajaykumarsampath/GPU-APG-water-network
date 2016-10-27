@@ -1,11 +1,21 @@
-# Effinet-cuda
-The Effinet-cuda repository containts the CUDA-C implementation of 
-accelerated proximal gradient (APG) to solve the dual problem of the 
-stocahstic model predictive optimisation problem for the management
-of water networks of Barcelona as a part of the EFFINET project. 
-Detailed explaination about theory and algorithm was discussed 
-in the paper https://arxiv.org/abs/1604.01074. This paper is the bases 
-for the functions defined in this package. 
+# GPU-APG-Water-network 
+The objective of this project is to manage the water network taking the 
+stochastic nature of the water demand. We proposed to use stochastic model 
+predictive controller that considers the probabilistic nature of the 
+water demand in deciding the control policy. We identified the main hinderance 
+for practical implementation of the stochastic predictive control in water 
+network is lack of algorithms that can solve the control problem in real-time. 
+To overcome this limitation we proposed an optimisation algotithm that exploits
+the structure of a stochastic optimal control problem and suitable for parallelisation. 
+This method use the dual formulation and uses the accelerated proximal gradient 
+(APG) algorithm to solve this. Detailed explaination about theory and 
+algorithm is discussed in the paper https://arxiv.org/abs/1604.01074.
+
+
+This repository containts the CUDA-C implementation of the accelerated proximal
+gradient (APG) algorithm to solve the stochastic predicitve control problem on
+the water networks of Barcelona. This work is done as a part of the EFFINET project. 
+The routines defined are based on the Algorithms in the paper.
 
 # Explanation details 
 The file main_effinet.cu contains the main function. The list of 
