@@ -1,14 +1,14 @@
 # GPU-APG-Water-network 
 The objective of this project is to manage the water network taking the 
-stochastic nature of the water demand. We proposed to use stochastic model 
-predictive controller that considers the probabilistic nature of the 
-water demand in deciding the control policy. We identified the main hinderance 
-for practical implementation of the stochastic predictive control in water 
-network is lack of algorithms that can solve the control problem in real-time. 
-To overcome this limitation we proposed an optimisation algotithm that exploits
-the structure of a stochastic optimal control problem and suitable for parallelisation. 
-This method use the dual formulation and uses the accelerated proximal gradient 
-(APG) algorithm to solve this. Detailed explaination about theory and 
+stochastic nature of the water demand. A stochastic model predictive controller
+considers the probabilistic nature of the water demand in deciding the control
+policy. But the main hinderance for practical implementation of the stochastic
+predictive control in water network is lack of proper optimisation algorithms
+that can solve this problem in real-time. To overcome this limitation we 
+proposed an optimisation algotithm that exploits the structure of a stochastic
+optimal control problem and suitable for parallelisation. This method is 
+based on accelerated proximal gradient (APG) algorithm and uses the dual
+formulation to solve the problem. Detailed explaination about theory and 
 algorithm is discussed in the paper https://arxiv.org/abs/1604.01074.
 
 
@@ -16,6 +16,7 @@ This repository containts the CUDA-C implementation of the accelerated proximal
 gradient (APG) algorithm to solve the stochastic predicitve control problem on
 the water networks of Barcelona. This work is done as a part of the EFFINET project. 
 The routines defined are based on the Algorithms in the paper.
+
 
 # Explanation details 
 The file main_effinet.cu contains the main function. The list of 
