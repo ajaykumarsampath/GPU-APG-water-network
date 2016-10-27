@@ -1,6 +1,7 @@
-# GPU-APG-Water-network 
+# GPU-accelerated stochastic MPC
 The objective of this project is to incorporate the stochastic nature of 
-the water demand for economical managment the water networks. A stochastic model predictive controller
+the water demand for economical managment the water networks. 
+A stochastic model predictive controller
 considers the probabilistic nature of the water demand in deciding the control
 policy. But the main hinderance for practical implementation of the stochastic
 predictive control in water network is lack of proper optimisation algorithms
@@ -19,8 +20,8 @@ The routines defined are based on the Algorithms in the paper.
 
 
 # Explanation details 
-The file main_effinet.cu contains the main function. The list of 
-functions is given in the file api_effinet_cuda.cuh. Before executing the 
+The file `main_effinet.cu` contains the main function. The list of 
+functions is given in the file `api_effinet_cuda.cuh`. Before executing the 
 actual algorithm, memory for all the variables involved is allocated 
 in GPU. This includes the system state, control, system dynamic matrices,
 tree strucute, cost function and constraints on state and control input. 
@@ -34,7 +35,7 @@ the actual APG algorithm and need not be accounted in the actual runtime
 of the algorithm. 
 
 The steps of the algorithm APG algorithm is given by Equation 26 of the
-paper. This is implemented in the file Effinet_APG.cuh. For each step in 
+paper. This is implemented in the file `Effinet_APG.cuh`. For each step in 
 the algorithm, we defined a function -- for the extrapolation step Equation 26(a), 
 dual gradient calcualtion Equation 26(b), proximal function with respect to g 
 26(c) and dual variable update 26(d).  
@@ -55,7 +56,7 @@ less than 1 absoult deviation is used.
 # Implementation details 
 We use cuBLAS library for matrix-vector compuations. The solve-step is parallelisable 
 stage-wise and implemented with the function cublasSgemmBatched function. We also defined 
-_CUBLAS and _CUDA inline functions which use cudaError_t and cublasStatus_t for errors in
+`_CUBLAS` and `_CUDA` inline functions which use `cudaError_t` and `cublasStatus_t` for errors in
 the routines of cuda and cublas.
 
  
