@@ -22,21 +22,22 @@ The routines defined are based on the Algorithms in the paper.
 The file main_effinet.cu contains the main function. The list of 
 functions is given in the file api_effinet_cuda.cuh. Before executing the 
 actual algorithm, memory for all the variables involved is allocated 
-in GPU. This include the system state, control, system dynamic equations,
-tree strucute, dual variables and all the off-line matrices. All matrix
-multipliactions are perfomed used cuBLAS library. 
+in GPU. This includes the system state, control, system dynamic matrices,
+tree strucute, cost function and constraints on state and control input. 
+All the computations that re involved in the APG algorithm are matrice-vecotor 
+multiplications. The matrices that are invovled depends only on the 
+system dynamics, constraints, cost function and tree structure. Therefore 
+these matrices need not be calculated every sampling time. Appendix B of the paper
+provide details about these matrices. These matrices are implemented in the file 
+Effinet_factor_step.cuh. Note that these calculation need to be preformed before
+the actual APG algorithm and need not be accounted in the actual runtime
+of the algorithm. 
 
 The steps of the algorithm APG algorithm is given by Equation 26 of the
 paper. This is implemented in the file Effinet_APG.cuh. For each step in 
-the algorithm, we defined a function -- for the extration step Equation 26(a), 
+the algorithm, we defined a function -- for the extrapolation step Equation 26(a), 
 dual gradient calcualtion Equation 26(b), proximal function with respect to g 
-26(c) and dual variable update 26(d). All the off-line matrics are given by the 
-Appendix B in the paper. These calculations are implemented in the file 
-Effinet_factor_step.cuh. Note that these calculation need to be preformed before
-the actual APG algorithm. These off-line calcualtion depend on the tree structure, 
-system dynamics and cost function. As long as they are constant, the resulting 
-off-line matrices need not be changed. 
-
+26(c) and dual variable update 26(d).  
 
 The main computational step in this algorithm is the dual gradient calcualtion. 
 This is the Algorithm 1 in the paper and coded in the file Effinet_solve_Step.cuh.
@@ -51,7 +52,7 @@ result and check its tolerance. This tolerance depends on the value of the contr
 when the value is greater then 1 percentage of the deviation is used and when it is 
 less than 1 absoult deviation is used.
 
-# Implmentation details 
+# Implementation details 
 We use cuBLAS library for matrix-vector compuations. The solve-step is parallelisable 
 stage-wise and implemented with the function cublasSgemmBatched function. We also defined 
 _CUBLAS and _CUDA inline functions which use cudaError_t and cublasStatus_t for errors in
