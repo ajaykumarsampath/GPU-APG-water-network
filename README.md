@@ -1,6 +1,6 @@
 # GPU-APG-Water-network 
-The objective of this project is to manage the water network taking the 
-stochastic nature of the water demand. A stochastic model predictive controller
+The objective of this project is to incorporate the stochastic nature of 
+the water demand for economical managment the water networks. A stochastic model predictive controller
 considers the probabilistic nature of the water demand in deciding the control
 policy. But the main hinderance for practical implementation of the stochastic
 predictive control in water network is lack of proper optimisation algorithms
